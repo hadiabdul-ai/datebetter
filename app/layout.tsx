@@ -1,5 +1,6 @@
 import './css/style.css'
 
+import { GoogleTagManager } from '@next/third-parties/google'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 
@@ -40,18 +41,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8VK8PWK9Q"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)}
-          gtag('js', new Date());
-
-          gtag('config', 'G-F8VK8PWK9Q');
-        </script>
-      </head>
       <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
       <body className={`${inter.variable} ${cabinet.variable} font-inter antialiased bg-white text-gray-800 tracking-tight`}>
+        <GoogleTagManager gtmId="G-F8VK8PWK9Q" />
         <div className="flex flex-col min-h-screen overflow-hidden">
           {children}
         </div>
