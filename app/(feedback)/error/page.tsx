@@ -12,7 +12,7 @@ export default function ErrorComponent() {
         <h3 className="h3 font-cabinet-grotesk">Oops something went wrong!</h3>
       </div>
       <div className="max-w-5xl mx-auto text-center">
-        <p className='text-xl'>There was an error processing you request, Please try again or {' '}
+        <p className='text-xl'>There was an error processing your request, Please try again or {' '}
           <a className='text-blue-500 decoration-blue-500 underline-offset-2 hover:underline' href='/contact-us'>
           contact us</a>.</p>
       </div>
