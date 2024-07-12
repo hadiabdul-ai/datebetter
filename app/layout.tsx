@@ -1,10 +1,7 @@
-'use client';
 import './css/style.css'
 
-import { useEffect } from 'react';
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import { initializeGTM } from '@/utils/gtm';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -41,16 +38,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  useEffect(() => {
-    initializeGTM();
-  }, []);
-  
   return (
     <html lang="en">
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8VK8PWK9Q"></script>
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F8VK8PWK9Q"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)}
+          gtag('js', new Date());
 
+          gtag('config', 'G-F8VK8PWK9Q');
+        </script>
+      </head>
       <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
-
       <body className={`${inter.variable} ${cabinet.variable} font-inter antialiased bg-white text-gray-800 tracking-tight`}>
         <div className="flex flex-col min-h-screen overflow-hidden">
           {children}
