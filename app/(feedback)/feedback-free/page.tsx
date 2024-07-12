@@ -27,6 +27,12 @@ export default function Feedback() {
     setCouponCode(event.target.value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleCouponSubmit();
+    }
+  };
+
 
   useEffect(() => {
     const feedbackObject = localStorage.getItem('feedback');
@@ -238,6 +244,7 @@ export default function Feedback() {
               type="text" 
               value={couponCode} 
               onChange={handleCouponCodeChange} 
+              onKeyDown={handleKeyDown}
               className="w-1/3 p-2 block border rounded mb-4" 
               placeholder="Coupon Code" 
             />
