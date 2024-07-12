@@ -1,15 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FeedbackFree } from '@/interfaces/feedback-free';
 import RatingCircle from '@/components/ui/rating-circle';
 import EmbeddedCheckoutForm from '@/components/ui/embedded-checkout';
 import Modal from '@/components/ui/modal';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+
+import StripelogoBlack from '@/public/images/Powered by Stripe - black.svg'
+import StripelogoPurple from '@/public/images/Powered by Stripe - blurple.svg'
+
 
 
 export default function Feedback() {
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [feedback, setFeedback] = useState<FeedbackFree | null>(null);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
@@ -46,7 +52,12 @@ export default function Feedback() {
         setUploadedImages(JSON.parse(storedImages));
       }
     }
-  }, []);
+
+      if (isCouponModalOpen && inputRef.current) {
+        inputRef.current.focus();
+      }
+  }, [isCouponModalOpen]);
+
 
   const handleCouponSubmit = async () => {
     const feedback_id = localStorage.getItem('feedback_id');
@@ -126,11 +137,15 @@ export default function Feedback() {
       
         <div className=''>
           <h2 className="text-3xl font-bold mb-4">⭐️ Actionable Improvements ⭐️</h2>
-          <div className="mt-8 mb-8 space-y-4">
+          <div className="mt-8 mb-8 space-y-4  mx-auto flex flex-col items-center">
             <button 
             className="bg-white  text-lg text-blue-500 border-blue-500 border px-10 py-3 rounded hover:text-white hover:bg-blue-600 transition duration-300" 
             onClick={handleOpenModal}>⭐️ Unlock Actionable Improvements</button>
+            
+            <Image src={StripelogoBlack} className="justify-center" width="130" height="150" priority alt="Powered by Stripe" />
+           
           </div>
+          
 
           <div className="text-left mb-6" data-aos="fade-up" data-aos-delay="200">
             <h4 className="text-xl font-bold m-4">🔍 Photos Analysis:</h4>
@@ -155,10 +170,11 @@ export default function Feedback() {
             </div>
           </div>
 
-          <div className="mt-8 mb-8 space-y-4">
+          <div className="mt-8 mb-8 space-y-4 mx-auto flex flex-col items-center">
             <button 
             className="bg-blue-500  text-lg text-white px-10 py-3 rounded hover:bg-blue-600 transition duration-300" 
             onClick={handleOpenModal}>⭐️ Unlock Actionable Improvements</button>
+             <Image src={StripelogoBlack} className="justify-center" width="130" height="150" priority alt="Powered by Stripe" />
           </div>
 
           <div className="text-left mb-6">
@@ -241,6 +257,7 @@ export default function Feedback() {
           <div className="p-6 flex flex-col items-center justify-center">
             <h2 className="text-2xl font-bold mb-4">Enter Coupon Code</h2>
             <input 
+              ref={inputRef} 
               type="text" 
               value={couponCode} 
               onChange={handleCouponCodeChange} 

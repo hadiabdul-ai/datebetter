@@ -40,6 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
       <body className={`${inter.variable} ${cabinet.variable} font-inter antialiased bg-white text-gray-800 tracking-tight`}>
         <div className="flex flex-col min-h-screen overflow-hidden">
           {children}
