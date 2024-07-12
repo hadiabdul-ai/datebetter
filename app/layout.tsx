@@ -1,9 +1,10 @@
+'use client';
 import './css/style.css'
 
 import { useEffect } from 'react';
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import { initializeGTM } from '../utils/gtm';
+import { initializeGTM } from '@/utils/gtm';
 
 const inter = Inter({
   subsets: ['latin'],
