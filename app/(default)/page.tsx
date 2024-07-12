@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Home - Creative',
-  description: 'Page description',
+  title: 'DateBetter - Profile Analyzer',
+  description: '10x your matches with our actionable feedback',
 }
 
 import Hero from '@/components/hero'
