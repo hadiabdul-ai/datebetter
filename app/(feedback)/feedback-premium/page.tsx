@@ -1,7 +1,6 @@
 "use client";
 import Link from 'next/link'
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FeedbackPremium } from '@/interfaces/feedback-premium';
 import RatingCircle from '@/components/ui/rating-circle';
@@ -13,7 +12,7 @@ interface FetchParams {
   type: 'session_id' | 'coupon_code';
 }
 
-export default function Feedback() {
+function FeedbackComponent() {
   const router = useRouter();
 
   const [premiumFeedback, setPremiumFeedback] = useState<FeedbackPremium | null>(null);
@@ -26,7 +25,7 @@ export default function Feedback() {
       setUploadedImages(JSON.parse(storedImages));
     }
 
-     const session_id = searchParams.get('session_id');
+    const session_id = searchParams.get('session_id');
     const coupon_code = searchParams.get('coupon_code');
     const feedback_id = searchParams.get('feedback_id');
 
@@ -36,10 +35,10 @@ export default function Feedback() {
       fetchPremiumFeedback({ id: coupon_code, feedbackId: feedback_id ?? undefined, type: 'coupon_code' });
     }
   }, [searchParams]);
-  
-  const fetchPremiumFeedback = async ({id, type, feedbackId}: FetchParams) => {
+
+  const fetchPremiumFeedback = async ({ id, type, feedbackId }: FetchParams) => {
     try {
-      const endpoint = type === 'session_id' 
+      const endpoint = type === 'session_id'
         ? `https://ymstlg2yd9.execute-api.us-east-1.amazonaws.com/prod/premium-feedback?session_id=${id}`
         : `https://ymstlg2yd9.execute-api.us-east-1.amazonaws.com/prod/premium-feedback?coupon_code=${id}&feedback_id=${feedbackId}`;
 
@@ -49,7 +48,7 @@ export default function Feedback() {
         router.push("/error");
         return;
       }
-    
+
       const data = await response.json();
       console.log('Fetched premium feedback:', data);
       setPremiumFeedback(data);
@@ -57,7 +56,6 @@ export default function Feedback() {
       console.error('Error fetching premium feedback:', error);
       router.push("/error");
     }
-    
   };
 
   const renderFeedback = (data: any) => {
@@ -128,7 +126,7 @@ export default function Feedback() {
           <h2 className="text-3xl font-bold mb-4">🗣️ General Feedback</h2>
           <p className="text-lg text-left mb-8">{premiumFeedback.feedback}</p>
         </div>
-      
+
         <div className=''>
           <h2 className="text-3xl font-bold mb-4">⭐️ Actionable Improvements ⭐️</h2>
           <div className="text-left mb-6" data-aos="fade-up" data-aos-delay="200">
@@ -175,11 +173,19 @@ export default function Feedback() {
         <div className='mt-20'>
           <h4 className="text-xl font-bold mb-4">What do you think about feedback?</h4>
           <Link className="btn-sm text-gray-800 bg-transparent hover:bg-gray-800 border-2 border-gray-800 hover:text-white shadow-sm" href="/contact-us">
-                Let us know
+            Let us know
           </Link>
         </div>
       </div>
 
     </div>
+  );
+}
+
+export default function Feedback() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FeedbackComponent />
+    </Suspense>
   );
 }
