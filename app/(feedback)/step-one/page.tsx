@@ -3,6 +3,7 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent, KeyboardEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
+import ReCaptcha from '@/components/re-captcha';
 
 export default function StepOne() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function StepOne() {
   const [progress, setProgress] = useState<number>(0);
   const [success, setSuccess] = useState<boolean>(false);
   const [formVisible, setFormVisible] = useState(true);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
@@ -64,6 +66,12 @@ export default function StepOne() {
   
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
+    if (!recaptchaToken) {
+      alert('Please complete the reCAPTCHA');
+      return;
+    }
+
     let percentage = 0;
     const interval = setInterval(() => {
       percentage += 1;
@@ -75,7 +83,7 @@ export default function StepOne() {
   
     try {
       await submitForm(
-        { pictures, bio, name, email },
+        { pictures, bio, name, email, recaptchaToken },
         () => {
           clearInterval(interval);
           setProgress(100);
@@ -164,7 +172,10 @@ export default function StepOne() {
                 <input id="email" type="email" className="form-input w-full text-gray-800 border rounded p-2" value={email} onChange={handleEmailChange} required />
               </div>
             </div>
-            <div className="max-w-xs mx-auto sm:flex justify-center mt-6">
+            <div className="max-w-xs mx-auto sm:flex justify-center mt-2">
+              <ReCaptcha onVerify={setRecaptchaToken} />
+            </div>
+            <div className="max-w-xs mx-auto sm:flex justify-center mt-4">
               <button type="submit" className="btn text-white bg-gray-800 hover:bg-gray-600 border-2 hover:bg-transparent hover:text-gray-800 hover:border-gray-800 w-full shadow-sm" disabled={loading}>
                 {loading ? 'Submitting...' : 'Submit'}
               </button>

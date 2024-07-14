@@ -60,7 +60,7 @@ export const useSubmitForm = () => {
   const [loading, setLoading] = useState(false);
 
   const submitForm = async (
-    { pictures, bio, name, email }: { pictures: File[], bio: string, name: string, email: string },
+    { pictures, bio, name, email, recaptchaToken, }: { pictures: File[], bio: string, name: string, email: string, recaptchaToken: string},
     onSuccess: () => void,
     onError: (error: any) => void
   ) => {
@@ -79,6 +79,7 @@ export const useSubmitForm = () => {
     formData.append('bio', bio);
     formData.append('name', name);
     formData.append('email', email);
+    formData.append('recaptchaToken', recaptchaToken);
 
     try {
       const response = await axios.post('https://ymstlg2yd9.execute-api.us-east-1.amazonaws.com/prod/analyze', formData, {
