@@ -79,7 +79,7 @@ export const useSubmitForm = () => {
     formData.append('bio', bio);
     formData.append('name', name);
     formData.append('email', email);
-    formData.append('recaptchaToken', recaptchaToken);
+    formData.append('recaptcha_token', recaptchaToken);
 
     try {
       const response = await axios.post('https://ymstlg2yd9.execute-api.us-east-1.amazonaws.com/prod/analyze', formData, {
