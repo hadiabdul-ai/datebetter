@@ -128,7 +128,7 @@ function FeedbackComponent() {
         </div>
 
         <div className=''>
-          <h2 className="text-3xl font-bold mb-4">⭐️ Actionable Improvements ⭐️</h2>
+          <h2 className="text-3xl font-bold mb-4">⭐️ Actionable Improvements</h2>
           <div className="text-left mb-6" data-aos="fade-up" data-aos-delay="200">
             <h4 className="text-xl font-bold mb-4">🔍 Photos Analysis:</h4>
 

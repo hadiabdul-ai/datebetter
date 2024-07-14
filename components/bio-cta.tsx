@@ -15,7 +15,7 @@ export default function BioCTA() {
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="py-12 md:py-20">
+        <div className="py-4 md:pb-20">
           {/* Section header */}
           {/* <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 font-cabinet-grotesk">Join over 2M creatives from around the world</h2>
@@ -46,8 +46,7 @@ export default function BioCTA() {
                 </span>
                   </h3>
                 <p className="text-xl text-gray-500 mb-6">
-                A captivating bio is the key to standing out on dating apps, 
-                placing your profile among the top 10%. We specialize in crafting personalized bios that highlight your unique personality and help you build genuine connections. Let us help you make a memorable first impression and attract the right matches.
+                We specialize in crafting personalized bios that highlight your unique personality and help you build genuine connections. Let us help you make a memorable first impression and attract the right matches.
                 </p>
                 <div className='max-w-xs mx-auto sm:flex justify-center'>
                   <Link className="btn text-white bg-gray-800 hover:bg-gray-600 border-2 hover:bg-transparent hover:text-gray-800  hover:border-gray-800 w-full shadow-sm" href="/step-one">

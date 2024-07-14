@@ -131,7 +131,7 @@ export default function Feedback() {
 
         <div className=''>
           <h2 className="text-3xl font-bold mb-4">🗣️ General Feedback</h2>
-          <p className="text-lg text-left mb-8">{feedback.feedback}</p>
+          <p className="text-lg text-left mb-8">{feedback.feedback} Unlock actionable improvements for detailed analysis.</p>
         </div>
       
         <div className=''>

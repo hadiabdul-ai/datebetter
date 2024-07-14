@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import HeroImage from '@/public/images/screenshot.svg'
+import HeroImage from '@/public/images/hero-image.png'
 import TinderLogo from '@/public/images/tinder.png'
 import HingeLogo from '@/public/images/Hinge.png'
 import BumbleLogo from '@/public/images/Bumble.png'
 import SalamsLogo from '@/public/images/salams.svg'
 import DilMilLogo from '@/public/images/dilmil.png'
-import DatingAppLogos from '@/public/images/dating-app-logos.svg'
+import DatingAppLogos from '@/public/images/dating-apps.png'
 
 import { HoverBorderGradientButton } from './button-border-gradient'
 
@@ -22,14 +22,14 @@ export default function Hero() {
       {/* Bg */}
       <div className="absolute inset-0 rounded-bl-[100px] bg-gray-100 pointer-events-none -z-10" aria-hidden="true" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pt-28 pb-12 md:pb-20 md:pt-44">
+        <div className="pt-24 pb-12 md:pb-20 md:pt-44">
           {/* Hero content */}
           <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row">
             {/* Content */}
             <div className="md:w-[640px]">
               {/* Copy */}
               <h1 className="h1 font-cabinet-grotesk mb-6" data-aos="fade-right" data-aos-delay="100">
-                Boost your dating app {' '}
+                10x your dating app {' '}
                 <span className="relative inline-flex text-rose-500">
                   <svg
                     className="absolute left-0 top-full -mt-4 max-w-full -z-10"
@@ -48,8 +48,8 @@ export default function Hero() {
                 </span>
               </h1>
               <p className="text-xl text-gray-700 mb-5" data-aos="fade-right" data-aos-delay="200">
-                Get actionable feedback and implement in minutes to get more matches. We have analyzed thousands of profiles
-                and trained our AI models to help you create a profile that truly stands out.
+                Get <span className='font-bold'>actionable feedback</span> and implement in minutes. We have analyzed thousands of profiles
+                and trained our <span className='font-bold'>AI models</span> to help you create a profile that truly stands out.
               </p>
               {/* Buttons */}
               <div
@@ -73,16 +73,16 @@ export default function Hero() {
             </div>
             {/* Image */}
             <div
-              className="max-w-sm mx-auto md:max-w-none md:absolute md:left-[32rem] md:ml-16 lg:ml-32 xl:ml-52"
+              className="max-w-sm mx-auto md:max-w-none md:absolute md:left-[30rem] md:ml-10 md:-mt-8 lg:ml-32 xl:ml-52"
               data-aos="fade-left"
               data-aos-duration="1100"
             >
-              <Image src={HeroImage} className="md:max-w-none" width="454" height="659" priority alt="Hero Illustration" />
+              <Image src={HeroImage} className="md:max-w-none" width="470" height="760" priority alt="Hero Illustration" />
             </div>         
           </div>
 
           {/* Works with all dating apps */}
-          <div className="items-center mt-8" data-aos="fade-up" data-aos-delay="200">
+          <div className="items-center mt-4" data-aos="fade-up" data-aos-delay="200">
             <p className="text-xl text-center text-gray-500 mb-3">
               Works with all dating apps.
             </p>
