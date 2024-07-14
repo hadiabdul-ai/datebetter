@@ -116,9 +116,6 @@ export default function StepOne() {
                 <label className="block text-gray-700 text-lg font-medium" htmlFor="pictures">
                   Pictures (max 10)
                 </label>
-                <label className="block text-gray-500 text-sm mb-1" htmlFor="pictures">
-                 Note: Pictures are not stored in our servers, only used for one-time analysis.
-                </label>
                 <div className="flex items-center justify-center w-full h-28 border rounded-md border-gray-200 cursor-pointer bg-white hover:bg-gray-100 relative">
                   <input id="dropzone-file" type="file" className="absolute inset-0 opacity-0 cursor-pointer" onChange={handleFileChange} multiple />
                   <div className="flex flex-col items-center justify-center w-full h-full">

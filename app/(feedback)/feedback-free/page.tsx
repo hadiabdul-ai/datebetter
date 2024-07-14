@@ -136,11 +136,11 @@ export default function Feedback() {
         </div>
       
         <div className=''>
-          <h2 className="text-3xl font-bold mb-4">⭐️ Actionable Improvements ⭐️</h2>
+          <h2 className="text-3xl font-bold mb-4">⭐️ Actionable Improvements</h2>
           <div className="mt-8 mb-8 space-y-4  mx-auto flex flex-col items-center">
             <button 
             className="bg-white  text-lg text-blue-500 border-blue-500 border px-10 py-3 rounded hover:text-white hover:bg-blue-600 transition duration-300" 
-            onClick={handleOpenModal}>⭐️ Unlock Actionable Improvements</button>
+            onClick={handleOpenModal}>Unlock Actionable Improvements</button>
             
             <Image src={StripelogoBlack} className="justify-center" width="130" height="150" priority alt="Powered by Stripe" />
            
@@ -252,7 +252,7 @@ export default function Feedback() {
       </div>
       
      
-      <div className='px-24 w-full'>
+      {/* <div className='px-24 w-full'>
         <Modal isOpen={isCouponModalOpen} onClose={handleCloseCouponModal} className='w-full max-w-3xl'>
           <div className="p-6 flex flex-col items-center justify-center">
             <h2 className="text-2xl font-bold mb-4">Enter Coupon Code</h2>
@@ -272,7 +272,7 @@ export default function Feedback() {
             </button>
           </div>
         </Modal>
-      </div>
+      </div> */}
 
     </div>
     
