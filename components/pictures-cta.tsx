@@ -19,7 +19,7 @@ export default function PicturesCTA() {
   return (
     
     <section>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-10">
         <div className="py-10 md:py-8">
           {/* Section header */}
           {/* <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
@@ -70,7 +70,7 @@ export default function PicturesCTA() {
           <div className="max-w-xl py-6 mx-auto md:max-w-none flex flex-col md:flex-row md:items-center space-y-8 md:space-y-0">
             
             {/* Content */}
-            <div className="md:w-1/2 md:pl-10 lg:pl-20 justify-center " data-aos="fade-right" data-aos-delay="100">
+            <div className="md:w-1/2 justify-center " data-aos="fade-right" data-aos-delay="100">
               <div className="text-center justify-center md:text-left">
                 <h3 className="h3 font-cabinet-grotesk text-4xl mb-4">84% of matches come from {' '}               
                   <span className="relative inline-flex text-rose-500">
@@ -117,7 +117,7 @@ export default function PicturesCTA() {
             {/* Creatives cards */}
             <div className="md:w-1/2" data-aos-id-cards data-aos="fade-right" data-aos-delay="100">
               <div className="text-center md:text-left">
-                <Image className="inline-block mt-6 mb-12" src={Matches} width={480} height={201} alt="Creatives" />
+                <Image className="inline-block mt-6 mb-12" src={Matches} width={500} height={201} alt="Creatives" />
                 
               </div>
             </div>
@@ -153,6 +153,7 @@ export default function PicturesCTA() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

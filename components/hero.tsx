@@ -22,7 +22,7 @@ export default function Hero() {
       {/* Bg */}
       <div className="absolute inset-0 rounded-bl-[100px] bg-gray-100 pointer-events-none -z-10" aria-hidden="true" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pt-24 pb-12 md:pb-20 md:pt-44">
+        <div className="pt-24 pb-12 md:pb-20 md:pt-40">
           {/* Hero content */}
           <div className="relative max-w-xl mx-auto md:max-w-none text-center md:text-left flex flex-col md:flex-row">
             {/* Content */}
@@ -82,7 +82,7 @@ export default function Hero() {
           </div>
 
           {/* Works with all dating apps */}
-          <div className="items-center mt-4" data-aos="fade-up" data-aos-delay="200">
+          <div className="items-center mt-8 md:pt-0" data-aos="fade-up" data-aos-delay="200">
             <p className="text-xl text-center text-gray-500 mb-3">
               Works with all dating apps.
             </p>
