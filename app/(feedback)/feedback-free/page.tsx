@@ -7,9 +7,8 @@ import EmbeddedCheckoutForm from '@/components/ui/embedded-checkout';
 import Modal from '@/components/ui/modal';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-
 import StripelogoBlack from '@/public/images/Powered by Stripe - black.svg'
-import StripelogoPurple from '@/public/images/Powered by Stripe - blurple.svg'
+
 
 
 

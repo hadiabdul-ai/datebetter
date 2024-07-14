@@ -4,6 +4,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent, KeyboardEvent } fro
 import { useRouter } from 'next/navigation';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
 import ReCaptcha from '@/components/re-captcha';
+import Modal from '@/components/ui/modal';
 
 export default function StepOne() {
   const router = useRouter();
@@ -17,6 +18,12 @@ export default function StepOne() {
   const [success, setSuccess] = useState<boolean>(false);
   const [formVisible, setFormVisible] = useState(true);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [agreeTerms, setAgreeTerms] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
@@ -24,7 +31,7 @@ export default function StepOne() {
       alert('You can only upload a maximum of 10 pictures.');
       return;
     }
-    
+
     setPictures(prevPictures => [...prevPictures, ...files]);
     const urls = files.map(file => URL.createObjectURL(file));
     setPreviewUrls(prevUrls => [...prevUrls, ...urls]);
@@ -56,19 +63,23 @@ export default function StepOne() {
   useEffect(() => {
     if (success) {
       setFormVisible(false);
-      // Add a small delay before redirecting
       const timer = setTimeout(() => {
         router.push('/feedback-free');
       }, 100);
       return () => clearTimeout(timer);
     }
   }, [success, router]);
-  
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     if (!recaptchaToken) {
       alert('Please complete the reCAPTCHA');
+      return;
+    }
+
+    if (!agreeTerms) {
+      alert('You must agree to the terms and conditions');
       return;
     }
 
@@ -80,14 +91,13 @@ export default function StepOne() {
         clearInterval(interval);
       }
     }, 120);
-  
+
     try {
       await submitForm(
-        { pictures, bio, name, email, recaptchaToken },
+        { pictures, bio, name, email, recaptchaToken, agreeTerms  },
         () => {
           clearInterval(interval);
           setProgress(100);
-          // Don't set success immediately, wait for the progress to reach 100%
           setTimeout(() => setSuccess(true), 150);
           setSuccess(true);
         },
@@ -131,7 +141,6 @@ export default function StepOne() {
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-
                   </div>
                 </div>
                 {previewUrls.length > 0 && (
@@ -172,6 +181,28 @@ export default function StepOne() {
                 <input id="email" type="email" className="form-input w-full text-gray-800 border rounded p-2" value={email} onChange={handleEmailChange} required />
               </div>
             </div>
+
+            <div className="flex items-center mb-4">
+              <input
+                id="agree-terms"
+                type="checkbox"
+                className="form-checkbox h-5 w-5 text-gray-800"
+                checked={agreeTerms}
+                onChange={() => setAgreeTerms(!agreeTerms)}
+                required
+              />
+              <label htmlFor="agree-terms" className="ml-2 text-gray-700">
+                I agree to the
+                <button
+                  type="button"
+                  className="text-blue-600 underline ml-1"
+                  onClick={handleOpenModal}
+                >
+                  terms and conditions
+                </button>
+              </label>
+            </div>
+
             <div className="max-w-xs mx-auto sm:flex justify-center mt-2">
               <ReCaptcha onVerify={setRecaptchaToken} />
             </div>
@@ -183,6 +214,44 @@ export default function StepOne() {
           </form>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="p-6">
+          <h2 className="text-xl font-bold mb-4">Terms and Conditions</h2>
+          <div className="max-h-96 overflow-y-auto">
+            
+            <p className="mt-4"><strong>1. Acceptance of Terms</strong></p>
+            <p>By accessing and using the DateBetter application ("App"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, you may not use the App.</p>
+            
+            <p className="mt-4"><strong>2. Description of Service</strong></p>
+            <p>The App provides feedback on dating profiles, including analysis of pictures and bio. The feedback is for informational purposes only and does not guarantee any specific outcomes.</p>
+            
+            <p className="mt-4"><strong>3. User Responsibilities</strong></p>
+            <p>You are responsible for providing accurate and complete information and for keeping your login credentials confidential. You agree not to use the App for any unlawful or prohibited activities.</p>
+            
+            <p className="mt-4"><strong>4. Limitation of Liability</strong></p>
+            <p>To the fullest extent permitted by law, DateBetter and its affiliates, officers, agents, and employees shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from (i) your use of the App; (ii) your reliance on any feedback provided through the App; (iii) any unauthorized access to or use of our servers and/or any personal information stored therein; (iv) any interruption or cessation of transmission to or from the App.</p>
+            
+            <p className="mt-4"><strong>5. Waiver of Responsibility</strong></p>
+            <p>You acknowledge and agree that the feedback provided by the App is subjective and for informational purposes only. DateBetter does not guarantee the accuracy, usefulness, or effectiveness of any feedback. You hereby waive any claims or legal action against DateBetter and its affiliates, officers, agents, and employees arising from your use of the feedback provided by the App.</p>
+            
+            <p className="mt-4"><strong>6. Data Privacy</strong></p>
+            <p>We are committed to protecting your privacy. Please review our Privacy Policy to understand how we collect, use, and disclose information about you.</p>
+            
+            <p className="mt-4"><strong>7. Modifications to the Terms</strong></p>
+            <p>DateBetter reserves the right to modify these Terms at any time. We will notify you of any changes by posting the new Terms on the App. Your continued use of the App after such changes have been posted constitutes your acceptance of the new Terms.</p>
+            
+            <p className="mt-4"><strong>8. Governing Law</strong></p>
+            <p>These Terms shall be governed and construed in accordance with the laws of Your Country/State, without regard to its conflict of law principles.</p>
+            
+            <p className="mt-4"><strong>9. Contact Us</strong></p>
+            <p>If you have any questions about these Terms, please contact us!</p>
+          </div>
+          <div className="flex justify-end mt-4">
+            <button onClick={handleCloseModal} className="btn text-white bg-gray-800 hover:bg-gray-600">Close</button>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 }
