@@ -23,7 +23,7 @@ const EmbeddedCheckoutForm = () => {
         const response = await axios.post(
           'https://ymstlg2yd9.execute-api.us-east-1.amazonaws.com/prod/create-checkout-session', 
           {"feedback_id": feedback_id}, 
-          {headers: {'Content-Type': 'multipart/form-data',}}
+          {headers: {'Content-Type': 'application/json',}}
         );
         setClientSecret(response.data.clientSecret);
       } catch (error) {
