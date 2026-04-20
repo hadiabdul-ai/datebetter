@@ -18,20 +18,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className }) =
       }
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
-
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
 
@@ -39,7 +31,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className }) =
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-auto overflow-y-auto outline-none focus:outline-none">
-      <div className="fixed inset-0 bg-black opacity-50"></div>
+      <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}></div>
       <div ref={modalRef} className={`relative mx-auto my-6 ${className}`}>
         <div className="relative flex flex-col bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none overflow-hidden max-h-[90vh]">
           <div className="flex items-start justify-between p-4 border-b border-solid border-blueGray-200 rounded-t">
