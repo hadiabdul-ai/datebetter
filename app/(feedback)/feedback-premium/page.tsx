@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { FeedbackPremium } from '@/interfaces/feedback-premium';
 import RatingCircle from '@/components/ui/rating-circle';
 import { useRouter } from 'next/navigation';
+import { downloadElementAsPdf } from '@/utils/downloadPdf';
 
 interface FetchParams {
   id: string;
@@ -93,8 +94,20 @@ function FeedbackComponent() {
     );
   }
 
+  const handleDownloadPdf = () => {
+    downloadElementAsPdf('feedback-content', 'datebetter-premium-report.pdf');
+  };
+
   return (
     <div className="max-w-5xl mx-auto text-center pb-12">
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={handleDownloadPdf}
+          className="bg-gray-800 text-white text-sm px-4 py-2 rounded hover:bg-gray-600 transition duration-300"
+        >
+          ⬇️ Download Report (PDF)
+        </button>
+      </div>
       <div className="bg-white shadow-md rounded-lg p-6" id="feedback-content">
         <div className='mb-6'>
           <h2 className="text-3xl font-bold mb-6">Ratings</h2>
