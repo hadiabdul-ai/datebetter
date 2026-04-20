@@ -125,6 +125,7 @@ export default function StepOne() {
       )}
       <div className="max-w-3xl mx-auto text-center pb-12">
         <h3 className="h3 font-cabinet-grotesk">Upload your 📸 Pictures and ✍🏼 Bio</h3>
+        <p className="mt-3 text-gray-600">You can also include pictures of your bio or drop screenshots straight from your dating app.</p>
       </div>
       <div className={`transition-opacity duration-300 ${formVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-2xl mx-auto">
@@ -140,7 +141,7 @@ export default function StepOne() {
                     <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop — profile pics, bio shots, or dating app screenshots</p>
                   </div>
                 </div>
                 {previewUrls.length > 0 && (
@@ -160,9 +161,9 @@ export default function StepOne() {
             <div className="flex flex-wrap mb-4">
               <div className="w-full">
                 <label className="block text-gray-700 text-lg font-medium mb-1" htmlFor="bio">
-                  Bio
+                  Bio <span className="text-sm text-gray-500 font-normal">(optional)</span>
                 </label>
-                <textarea id="bio" className="form-textarea w-full text-gray-800 border rounded p-2 h-24" value={bio} onChange={handleBioChange} onKeyDown={handleKeyPress} required></textarea>
+                <textarea id="bio" className="form-textarea w-full text-gray-800 border rounded p-2 h-24" value={bio} onChange={handleBioChange} onKeyDown={handleKeyPress}></textarea>
               </div>
             </div>
             <div className="flex flex-wrap mb-4">
