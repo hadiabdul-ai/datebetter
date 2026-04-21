@@ -8,7 +8,7 @@ import Modal from '@/components/ui/modal';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import StripelogoBlack from '@/public/images/Powered by Stripe - black.svg'
-import { downloadElementAsPdf } from '@/utils/downloadPdf';
+import { downloadFreePdf } from '@/utils/downloadPdf';
 
 
 
@@ -102,7 +102,7 @@ export default function Feedback() {
   }
 
   const handleDownloadPdf = () => {
-    downloadElementAsPdf('feedback-content', 'datebetter-free-report.pdf');
+    if (feedback) downloadFreePdf(feedback);
   };
 
   return (

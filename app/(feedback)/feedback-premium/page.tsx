@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { FeedbackPremium } from '@/interfaces/feedback-premium';
 import RatingCircle from '@/components/ui/rating-circle';
 import { useRouter } from 'next/navigation';
-import { downloadElementAsPdf } from '@/utils/downloadPdf';
+import { downloadPremiumPdf } from '@/utils/downloadPdf';
 
 interface FetchParams {
   id: string;
@@ -95,7 +95,7 @@ function FeedbackComponent() {
   }
 
   const handleDownloadPdf = () => {
-    downloadElementAsPdf('feedback-content', 'datebetter-premium-report.pdf');
+    if (premiumFeedback) downloadPremiumPdf(premiumFeedback, uploadedImages);
   };
 
   return (
